@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="slider.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="contaner">
+      <div class="slider">
+        <div class="slide"><img src="/img/Avengers.png" alt="" /></div>
+        <div class="slide">
+          <img src="/img/Spiderman.png" alt="" />
+        </div>
+        <div class="slide"><img src="/img/Hulk.png" alt="" /></div>
+        <div class="slide">
+          <img src="/img/Guardian of the Galaxy.png" alt="" />
+        </div>
+      </div>
+      <div class="sliderNav">
+        <div class="sliderNav__dot"></div>
+        <div class="sliderNav__dot"></div>
+        <div class="sliderNav__dot"></div>
+        <div class="sliderNav__dot"></div>
+      </div>
+    </div>
+
+    <script>
+      const styleArray = ["slide1", "slide2", "slide3", "slide4"];
+      const slideNomber = document.querySelectorAll(".slide");
+      const dotNomber = document.querySelectorAll(".sliderNav__dot");
+      dotNomber[0].classList.add("active3");
+
+      for (i = 0; i < slideNomber.length; i++) {
+        slideNomber[i].classList.add("slide" + (i + 1));
+      }
+      let a = 0;
+      let b;
+
+      setInterval(function slider() {
+        b = a + 1;
+        if (b === 4) {
+          b = 0;
+        }
+        const dotNomberActive = document.querySelector(".active3");
+        dotNomberActive.classList.remove("active3");
+        slideNomber[a].classList.add("active1");
+        setTimeout(() => {
+          dotNomber[b].classList.add("active3");
+          slideNomber[a].classList.remove("active1");
+          slideNomber[a].classList.add("active2");
+          a += 1;
+          if (a === 4) {
+            a = 0;
+          }
+        }, 500);
+        reConstructor();
+      }, 5000);
+
+      function reConstructor() {
+        for (j = 0; j < slideNomber.length; j++) {
+          slideNomber[j].classList.remove(styleArray[j]);
+        }
+        styleArray.unshift(styleArray.pop());
+        for (k = 0; k < slideNomber.length; k++) {
+          slideNomber[k].classList.add(styleArray[k]);
+        }
+        let activeNull = document.querySelector(".active2");
+        activeNull.classList.remove("active2");
+      }
+    </script>
+  </body>
+</html>
